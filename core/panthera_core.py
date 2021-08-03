@@ -74,7 +74,7 @@ class Panthera:
     parent = None
     children = []
 
-    def __init__(self, mother=None, father=None, children=[]):
+    def __init__(self, mother=None, father=None, children=[], gender=None):
         if mother:
             if not issubclass(mother.__class__, Panthera):
                 raise ValueError('mother must be an instance of Panthera')
@@ -88,7 +88,7 @@ class Panthera:
                         f'All children passed must be an instance of '
                         f'Panthera. Recieved {child} in index {i}.'
                     )
-        self.gender = Gender.get_random_gender()
+        self.gender = gender if gender else Gender.get_random_gender()
         self.mother = mother
         self.father = father
         self.children = children

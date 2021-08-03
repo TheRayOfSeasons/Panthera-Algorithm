@@ -1,3 +1,4 @@
+import math
 import random
 
 from .exceptions import UnableToBreedException
@@ -180,8 +181,8 @@ class Panthera:
         parents = [panthera_x, panthera_y]
         male = max(parents, key=lambda panthera: panthera.gender)
         female = min(parents, key=lambda panthera: panthera.gender)
-        male_fragments = male.get_name_fragments(female)
-        female_fragments = female.get_name_fragments(male)
+        male_fragments = female.get_name_fragments(male)
+        female_fragments = male.get_name_fragments(female)
         offspring = Panthera(
             mother=female,
             father=male,
@@ -190,6 +191,10 @@ class Panthera:
         offspring.male_suffix = male_fragments['suffix']
         offspring.female_prefix = female_fragments['prefix']
         offspring.female_suffix = female_fragments['suffix']
+        offspring.generation = math.ceil(
+            # average of: male + 1 + female + 1
+            (male.generation + female.generation + 2) / 2
+        )
         male._add_child(offspring)
         female._add_child(offspring)
         return offspring

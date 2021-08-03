@@ -3,7 +3,7 @@ from .panthera_core import Gender
 from .panthera_core import Panthera
 
 
-class Tiger(Panthera, NameMapperMixin):
+class Tiger(NameMapperMixin, Panthera):
     """
     """
 
@@ -42,7 +42,7 @@ class Tiger(Panthera, NameMapperMixin):
     }
 
 
-class Lion(Panthera, NameMapperMixin):
+class Lion(NameMapperMixin, Panthera):
     """
     """
 
@@ -81,7 +81,7 @@ class Lion(Panthera, NameMapperMixin):
     }
 
 
-class Jaguar(Panthera, NameMapperMixin):
+class Jaguar(NameMapperMixin, Panthera):
     """
     """
 
@@ -120,7 +120,7 @@ class Jaguar(Panthera, NameMapperMixin):
     }
 
 
-class Leopard(Panthera, NameMapperMixin):
+class Leopard(NameMapperMixin, Panthera):
     """
     """
 

@@ -7,19 +7,19 @@ class NameMapperMixin(object):
     for specific pairs of panthera.
     """
 
+    # if self is female and partner is male
     self_with_male_map = {} # for male partner and female offspring
-    self_with_female_map = {} # for female partner and male offspring
 
-    _mappings = {
-        # if self is female and partner is male
-        Gender.MALE: self_with_male_map,
-        # if self is male and partner is female
-        Gender.FEMALE: self_with_female_map
-    }
+    # if self is male and partner is female
+    self_with_female_map = {} # for female partner and male offspring
 
     def get_name_fragments(self, partner):
         fragments = super().get_name_fragments(partner)
-        data_map = self._mappings[partner.gender]
+        mappings = {
+            Gender.MALE: self.self_with_male_map,
+            Gender.FEMALE: self.self_with_female_map
+        }
+        data_map = mappings[partner.gender]
         partner_name = partner.name
         custom_fragments = data_map[partner_name]
         if custom_fragments:

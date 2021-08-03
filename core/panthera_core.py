@@ -71,7 +71,8 @@ class Panthera:
     female_suffix = ''
     generation = 0
     gender = Gender.UNDEFINED
-    parent = None
+    mother = None
+    father = None
     children = []
 
     def __init__(self, mother=None, father=None, children=[], gender=None):

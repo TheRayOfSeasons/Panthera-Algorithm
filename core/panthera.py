@@ -4,9 +4,6 @@ from .panthera_core import Panthera
 
 
 class Tiger(NameMapperMixin, Panthera):
-    """
-    """
-
     male_prefix = 'Ti'
     male_suffix = 'ger'
     female_prefix = 'Ti'
@@ -43,9 +40,6 @@ class Tiger(NameMapperMixin, Panthera):
 
 
 class Lion(NameMapperMixin, Panthera):
-    """
-    """
-
     male_prefix = 'Li'
     male_suffix = 'on'
     female_prefix = 'Li'
@@ -82,9 +76,6 @@ class Lion(NameMapperMixin, Panthera):
 
 
 class Jaguar(NameMapperMixin, Panthera):
-    """
-    """
-
     male_prefix = 'Jag'
     male_suffix = 'uar'
     female_prefix = 'Ja'
@@ -92,8 +83,8 @@ class Jaguar(NameMapperMixin, Panthera):
 
     self_with_male_map = {
         'Tiger': {
-            'prefix': 'Jag',
-            'suffix': 'ger'
+            'prefix': 'Ti',
+            'suffix': 'guaress'
         },
         'Lion': {
             'prefix': 'Li',
@@ -106,8 +97,8 @@ class Jaguar(NameMapperMixin, Panthera):
     }
     self_with_female_map = {
         'Tigress': {
-            'prefix': 'Ti',
-            'suffix': 'guaress'
+            'prefix': 'Jag',
+            'suffix': 'ger'
         },
         'Leopardess': {
             'prefix': 'Ja',
@@ -121,9 +112,6 @@ class Jaguar(NameMapperMixin, Panthera):
 
 
 class Leopard(NameMapperMixin, Panthera):
-    """
-    """
-
     male_prefix = 'Leo'
     male_suffix = 'pard'
     female_prefix = 'Leo'

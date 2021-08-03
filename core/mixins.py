@@ -21,7 +21,10 @@ class NameMapperMixin(object):
         }
         data_map = mappings[partner.gender]
         partner_name = partner.name
-        custom_fragments = data_map[partner_name]
+        try:
+            custom_fragments = data_map[partner_name]
+        except KeyError:
+            custom_fragments = None
         if custom_fragments:
             if custom_fragments.get('prefix'):
                 fragments['prefix'] = custom_fragments.get('prefix')

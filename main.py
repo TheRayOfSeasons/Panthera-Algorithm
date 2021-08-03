@@ -1,31 +1,184 @@
-from core.panthera import Leopard
-from core.panthera import Lion
-from core.panthera import Jaguar
-from core.panthera import Tiger
-from core.panthera_core import Gender
+from core import Gender
+from core import Leopard
+from core import Lion
+from core import Jaguar
+from core import Panthera
+from core import Tiger
 
 
-count_per_specie = 10
+def get_defined_panthera():
+    """
+    Returns an assorted data set of panthera.
+    """
+    return {
+        'leopard': {
+            'male': Leopard(gender=Gender.MALE),
+            'female': Leopard(gender=Gender.FEMALE)
+        },
+        'lion': {
+            'male': Lion(gender=Gender.MALE),
+            'female': Lion(gender=Gender.FEMALE)
+        },
+        'jaguar': {
+            'male': Jaguar(gender=Gender.MALE),
+            'female': Jaguar(gender=Gender.FEMALE)
+        },
+        'tiger': {
+            'male': Tiger(gender=Gender.MALE),
+            'female': Tiger(gender=Gender.FEMALE)
+        }
+    }
 
-leopards = []
-lions = []
-jaguars = []
-tigers = []
 
-for i in range(count_per_specie):
-    leopards.append(Leopard())
-    lions.append(Lion())
-    jaguars.append(Jaguar())
-    tigers.append(Tiger())
+def test_breeding():
+    """
+    Test breeding process.
+    """
+    panthera_data = get_defined_panthera()
+    offsprings = [
+        # Leopard
+        {
+            'child': Panthera.breed(
+                panthera_data['leopard']['male'],
+                panthera_data['leopard']['female']
+            ),
+            'assertion': ['Leopard', 'Leopardess']
+        },
+
+        # Leopard to female of different breed
+        {
+            'child': Panthera.breed(
+                panthera_data['leopard']['male'],
+                panthera_data['lion']['female']
+            ),
+            'assertion': ['Leopon', 'Leoponess']
+        },
+        {
+            'child': Panthera.breed(
+                panthera_data['leopard']['male'],
+                panthera_data['jaguar']['female']
+            ),
+            'assertion': ['Leguar', 'Leguaress']
+        },
+        {
+            'child': Panthera.breed(
+                panthera_data['leopard']['male'],
+                panthera_data['tiger']['female']
+            ),
+            'assertion': ['Leoger', 'Leogress']
+        },
+
+        # Leopardess to male of different breed
+        {
+            'child': Panthera.breed(
+                panthera_data['leopard']['female'],
+                panthera_data['lion']['male']
+            ),
+            'assertion': ['Lipard', 'Lipardess']
+        },
+        {
+            'child': Panthera.breed(
+                panthera_data['leopard']['female'],
+                panthera_data['jaguar']['male']
+            ),
+            'assertion': ['Jagupard', 'Jagupardess']
+        },
+        {
+            'child': Panthera.breed(
+                panthera_data['leopard']['female'],
+                panthera_data['tiger']['male']
+            ),
+            'assertion': ['Tigard', 'Tigardess']
+        },
+
+        # Jaguar
+        {
+            'child': Panthera.breed(
+                panthera_data['jaguar']['male'],
+                panthera_data['jaguar']['female']
+            ),
+            'assertion': ['Jaguar', 'Jaguaress']
+        },
+
+        # Jaguar to female of other breed
+        {
+            'child': Panthera.breed(
+                panthera_data['jaguar']['male'],
+                panthera_data['tiger']['female']
+            ),
+            'assertion': ['Jagger', 'Jaggress']
+        },
+        {
+            'child': Panthera.breed(
+                panthera_data['jaguar']['male'],
+                panthera_data['lion']['female']
+            ),
+            'assertion': ['Jaglion', 'Jaglioness']
+        },
+
+        # Jaguaress to male of other breed
+        {
+            'child': Panthera.breed(
+                panthera_data['jaguar']['female'],
+                panthera_data['tiger']['male']
+            ),
+            'assertion': ['Tiguar', 'Tiguaress']
+        },
+        {
+            'child': Panthera.breed(
+                panthera_data['jaguar']['female'],
+                panthera_data['lion']['male']
+            ),
+            'assertion': ['Liguar', 'Liguaress']
+        },
+
+        # Lion
+        {
+            'child': Panthera.breed(
+                panthera_data['lion']['male'],
+                panthera_data['lion']['female']
+            ),
+            'assertion': ['Lion', 'Lioness']
+        },
+
+        # Lion to tiger
+        {
+            'child': Panthera.breed(
+                panthera_data['lion']['male'],
+                panthera_data['tiger']['female']
+            ),
+            'assertion': ['Liger', 'Ligress']
+        },
+        {
+            'child': Panthera.breed(
+                panthera_data['tiger']['male'],
+                panthera_data['lion']['female']
+            ),
+            'assertion': ['Tigon', 'Tigoness']
+        },
+
+        # Tiger
+        {
+            'child': Panthera.breed(
+                panthera_data['tiger']['male'],
+                panthera_data['tiger']['female']
+            ),
+            'assertion': ['Tiger', 'Tigress']
+        },
+    ]
+
+    for offspring in offsprings:
+        try:
+            assert offspring['child'].name in offspring['assertion']
+        except AssertionError:
+            import pdb; pdb.set_trace()
+
+    return panthera_data
 
 
-female_tigers = [tiger for tiger in tigers if tiger.gender == Gender.FEMALE]
-male_tigers = [tiger for tiger in tigers if tiger.gender == Gender.MALE]
-
-female_lions = [lion for lion in lions if lion.gender == Gender.FEMALE]
-male_lions = [lion for lion in lions if lion.gender == Gender.MALE]
-
-child = female_lions[0].breed_with(male_tigers[0])
-
-
-import pdb; pdb.set_trace()
+if __name__ == '__main__':
+    try:
+        test_breeding()
+        print('Test succeeded! :)')
+    except AssertionError:
+        print('Test Failed :(')

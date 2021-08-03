@@ -168,10 +168,7 @@ def test_breeding():
     ]
 
     for offspring in offsprings:
-        try:
-            assert offspring['child'].name in offspring['assertion']
-        except AssertionError:
-            import pdb; pdb.set_trace()
+        assert offspring['child'].name in offspring['assertion']
 
     return panthera_data
 

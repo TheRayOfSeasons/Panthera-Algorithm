@@ -100,7 +100,7 @@ class Panthera:
         except (AttributeError, TypeError):
             return False
 
-    def __gte__(self, other):
+    def __ge__(self, other):
         try:
             return self.generation >= other.generation
         except (AttributeError, TypeError):
@@ -112,7 +112,7 @@ class Panthera:
         except (AttributeError, TypeError):
             return False
 
-    def __lte__(self, other):
+    def __le__(self, other):
         try:
             return self.generation <= other.generation
         except (AttributeError, TypeError):

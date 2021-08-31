@@ -193,7 +193,7 @@ class Panthera:
         offspring.female_prefix = female_fragments['prefix']
         offspring.female_suffix = female_fragments['suffix']
         offspring.generation = math.ceil(
-            # average of: male + 1 + female + 1
+            # average of: (male + 1) + (female + 1)
             (male.generation + female.generation + 2) / 2
         )
         male._add_child(offspring)
